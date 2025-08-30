@@ -18,13 +18,16 @@ class ClearCommand(SlashCommandBuilder):
             return
         
         try:
-            del_messages = await interaction.channel.purge(amount)
+            channel = interaction.channel 
+            del_messages = await channel.purge(
+                limit=amount 
+            )
             
             await interaction.response.send_message(
                 content=f"{len(del_messages)} mensagens foram deletadas neste canal.", 
                 ephemeral=True
             )
-        except:
+        except Exception as err:
             await interaction.response.send_message(
                 content="Ocorreu um erro ao deletar as mensagens neste canal.",
                 ephemeral=True 
