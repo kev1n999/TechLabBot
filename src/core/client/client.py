@@ -31,6 +31,7 @@ class DiscordClient(discord.Client):
     def __init__(self, token, intents=None): 
         self.token = token 
         self.client_intents = intents  
+        self.welcome_channel_id = 1410430056035127383 
         
         if self.client_intents is None:
             self.client_intents = discord.Intents.all() 
@@ -48,6 +49,21 @@ class DiscordClient(discord.Client):
         
     async def on_ready(self):
         logger.info(f"Bot está online como {self.user.name} (ID: {self.user.id})")
+    
+    async def on_member_join(self, member: discord.Member):
+        channel = discord.utils.get(member.guild.text_channels, id=self.welcome_channel_id)
+        
+        embed = discord.Embed(
+            title="Seja bem vindo!",
+            color=discord.Colour.blue()
+        )
+        
+        embed.set_image(url="https://media.discordapp.net/attachments/1408197595397886106/1411417435302793266/welcome.png?ex=68b4946b&is=68b342eb&hm=856376f8ba090988879da3015773ee337e91f032824494457c81eabc8df6b5ca&=&format=webp&quality=lossless&width=982&height=655")
+        
+        await channel.send(
+            content=f"Seja bem vindo {member.mention}!",    
+            embed=embed
+        )
         
     async def on_error(self, event_method, *args, **kwargs):
         logger.error(f"Erro no evento {event_method}", exc_info=True)

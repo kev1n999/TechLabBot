@@ -1,6 +1,7 @@
 import discord 
 from core.builders.button_builder import ButtonBuilder
 from core.builders.component_builder import ComponentBuilder
+from .ticket_options import close_ticket_button
 
 async def open_ticket_listener(interaction: discord.Interaction, button: discord.ui.Button):
     guild = interaction.guild 
@@ -11,7 +12,6 @@ async def open_ticket_listener(interaction: discord.Interaction, button: discord
         if not ticket_category:
             await guild.create_category(name="tickets")
         
-        
         everyone_overwrites = discord.PermissionOverwrite(view_channel=False, send_messages=False)
         author_overwrites = discord.PermissionOverwrite(view_channel=True, send_messages=True)
         
@@ -20,7 +20,7 @@ async def open_ticket_listener(interaction: discord.Interaction, button: discord
             interaction.user: author_overwrites
         })
         
-        await ticket_channel.send("Olá {}".format(interaction.user.mention))
+        await ticket_channel.send("Olá {}".format(interaction.user.mention), view=close_ticket_button)
     except:
         pass     
     

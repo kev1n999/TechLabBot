@@ -17,7 +17,7 @@ class BanCommand(SlashCommandBuilder):
             )
             return 
         
-        if member.guild_permissions.value >= interaction.user.guild_permissions.value:
+        if interaction.user.guild_permissions.value >= member.guild_permissions.value:
             await interaction.response.send_message(
                 content="Você não pode banir um membro que tenha permissões superiores ou iguais as suas!",
                 ephemeral=True 
@@ -36,8 +36,8 @@ class BanCommand(SlashCommandBuilder):
                 await member.send(
                     content=f"Você foi banido do servidor **{interaction.guild.name}** por **{interaction.user.name}**\nMotivo: `{reason}`"
                 )    
-            except:
-                print(f"Não foi possível enviar uma mensagem ao membro banido: {member.name}")
+            except Exception as err:
+                print(f"Não foi possível enviar uma mensagem ao membro banido: {member.name}\n\n{err}")
                 
             await interaction.response.send_message(
                 content=f"{member.mention} foi banido com sucesso do servidor.\nMotivo: **{reason}**",

@@ -12,10 +12,12 @@ class TicketSystemCommand(SlashCommandBuilder):
         
     async def callback(self, interaction: discord.Interaction, channel: discord.TextChannel):
         embed = discord.Embed(
-            title="Abra seu Ticket!",
+            title="✉️  Abra seu Ticket!",
             description="Para iniciar um atendimento, abra um ticket clicando no botão abaixo e aguarde ser atendido!",
             color=discord.Colour.blue()
         )
+        
+        embed.set_footer(text="Bot Lab 2025", icon_url=interaction.client.user.display_avatar)
         
         try:
             await channel.send(embed=embed, view=open_ticket_button)
