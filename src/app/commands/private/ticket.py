@@ -1,6 +1,6 @@
 import discord 
 from core.builders.command_builder import SlashCommandBuilder
-from ...components.buttons.ticket_buttons import open_ticket_button
+from ...components.selects.ticket_options import select_menu_options
 
 class TicketSystemCommand(SlashCommandBuilder):
     def __init__(self, tree):
@@ -20,7 +20,7 @@ class TicketSystemCommand(SlashCommandBuilder):
         embed.set_footer(text="Bot Lab 2025", icon_url=interaction.client.user.display_avatar)
         
         try:
-            await channel.send(embed=embed, view=open_ticket_button)
+            await channel.send(embed=embed, view=select_menu_options)
             await interaction.response.send_message(
                 content=f"A mensagem para abertura de tickets foi criada e enviada com sucesso em {channel.mention}!",
                 ephemeral=True 
