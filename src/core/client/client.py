@@ -2,7 +2,6 @@ import os
 import discord 
 from discord import app_commands 
 from dotenv import load_dotenv 
-from core.builders.command_builder import SlashCommandBuilder
 from .handlers.command import load_commands
 from core.utils.logger import setup_logger
 
@@ -49,10 +48,6 @@ class DiscordClient(discord.Client):
         
     async def on_ready(self):
         logger.info(f"Bot está online como {self.user.name} (ID: {self.user.id})")
-
-        await self.change_presence(
-            activity=discord.Game("Bot Lab!")
-        )
         
     async def on_member_join(self, member: discord.Member):
         channel = discord.utils.get(member.guild.text_channels, id=self.welcome_channel_id)
@@ -62,7 +57,7 @@ class DiscordClient(discord.Client):
             color=discord.Colour.blue()
         )
         
-        embed.set_image(url="https://media.discordapp.net/attachments/1408197595397886106/1411417435302793266/welcome.png?ex=68b4946b&is=68b342eb&hm=856376f8ba090988879da3015773ee337e91f032824494457c81eabc8df6b5ca&=&format=webp&quality=lossless&width=982&height=655")
+        embed.set_image(url="https://media.discordapp.net/attachments/1414050304030150828/1414064011112087624/image.png?ex=68be353c&is=68bce3bc&hm=198f1f87621d527a9a9c0611403545c2b2d3156572fe5afe61d6aa7c506a5031&=&format=webp&quality=lossless")
         
         await channel.send(
             content=f"Seja bem vindo {member.mention}!",    

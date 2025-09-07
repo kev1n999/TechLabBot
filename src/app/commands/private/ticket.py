@@ -17,7 +17,8 @@ class TicketSystemCommand(SlashCommandBuilder):
             color=discord.Colour.blue()
         )
         
-        embed.set_footer(text="Bot Lab 2025", icon_url=interaction.client.user.display_avatar)
+        embed.set_image(url="https://media.discordapp.net/attachments/1414050304030150828/1414051013538877593/image.png?ex=68be2921&is=68bcd7a1&hm=b9b9813dc84024b08432115b1994cfcbd2b7ee0ee788578111d5ac69d3d61c61&=&format=webp&quality=lossless")
+        embed.set_footer(text="TechLab - 2025")
         
         try:
             await channel.send(embed=embed, view=select_menu_options)
