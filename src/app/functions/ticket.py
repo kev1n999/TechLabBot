@@ -14,7 +14,7 @@ async def create_ticket(interaction: Interaction, member: discord.Member, choice
         everyone_overwrites = discord.PermissionOverwrite(view_channel=False, send_messages=False)
         author_overwrites = discord.PermissionOverwrite(view_channel=True, send_messages=True)
             
-        ticket_channel = await ticket_category.create_text_channel(name=f"{interaction.user.name}", overwrites={
+        ticket_channel = await ticket_category.create_text_channel(name=f"📂》{interaction.user.name}", overwrites={
             guild.default_role: everyone_overwrites,
             interaction.user: author_overwrites
         })
@@ -37,7 +37,7 @@ async def create_ticket(interaction: Interaction, member: discord.Member, choice
         )
         
         embed.set_footer(
-            text="Bot Lab - 2025",
+            text="TechLab - 2025",
             icon_url=interaction.client.user.display_avatar
         )
         

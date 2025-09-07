@@ -53,7 +53,7 @@ class DiscordClient(discord.Client):
         channel = discord.utils.get(member.guild.text_channels, id=self.welcome_channel_id)
         
         embed = discord.Embed(
-            title="Seja bem vindo!",
+            title="Seja bem vindo a TechLab!",
             color=discord.Colour.blue()
         )
         

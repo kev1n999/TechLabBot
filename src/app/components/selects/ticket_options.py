@@ -22,4 +22,4 @@ select_menu_options = ComponentBuilder(SelectMenuBuilder(
     placeholder="Selecione uma opção...",
     options=options, 
     select_listener=select_options_listener
-))
+), persistent=True)
