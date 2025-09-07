@@ -1,6 +1,7 @@
 import discord 
 from core.builders.command_builder import SlashCommandBuilder
 from ...components.selects.ticket_options import select_menu_options
+from ...constants.constants import DEFAULT_EMBED_COLOR
 
 class TicketSystemCommand(SlashCommandBuilder):
     def __init__(self, tree):
@@ -14,7 +15,7 @@ class TicketSystemCommand(SlashCommandBuilder):
         embed = discord.Embed(
             title="✉️  Abra seu Ticket!",
             description="Para iniciar um atendimento, abra um ticket clicando no botão abaixo e aguarde ser atendido!",
-            color=discord.Colour.blue()
+            color=DEFAULT_EMBED_COLOR
         )
         
         embed.set_image(url="https://media.discordapp.net/attachments/1414050304030150828/1414051013538877593/image.png?ex=68be2921&is=68bcd7a1&hm=b9b9813dc84024b08432115b1994cfcbd2b7ee0ee788578111d5ac69d3d61c61&=&format=webp&quality=lossless")

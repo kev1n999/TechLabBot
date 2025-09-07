@@ -11,11 +11,10 @@ async def delete_ticket(interaction: Interaction, button: discord.ui.Button):
         )
         return 
     
-    if not channel.category.name.lower() == "tickets":
-        return 
-    
     try:
-        await channel.delete()
+        if channel.category.name.lower() == "tickets" or channel.category.name.lower() == "fechados":
+            await channel.delete()
+            
     except:
         await interaction.response.send_message(
             content="Ocorreu um erro ao tentar deletar este ticket! Tente novamente mais tarde.",

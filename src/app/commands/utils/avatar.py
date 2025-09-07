@@ -1,6 +1,7 @@
 import discord 
 from core.builders.command_builder import SlashCommandBuilder
 from ...components.selects.selected_user_avatar import selected_user
+from ...constants.constants import DEFAULT_EMBED_COLOR
 
 class UserAvatarCommand(SlashCommandBuilder):
     def __init__(self, tree):
@@ -18,7 +19,7 @@ class UserAvatarCommand(SlashCommandBuilder):
         
         embed = discord.Embed(
             title=f"🖼 Avatar de {user.name}",
-            color=discord.Color.blue()
+            color=DEFAULT_EMBED_COLOR
             
         )
         

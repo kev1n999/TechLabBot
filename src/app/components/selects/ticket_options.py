@@ -3,7 +3,6 @@ from core.builders.select_builder import SelectOptionBuilder, SelectMenuBuilder
 from core.builders.component_builder import ComponentBuilder
 from ...functions.create_ticket import create_ticket
 
-
 options = [
     SelectOptionBuilder(label="🤖 Fazer um pedido", description="Clique para iniciar um pedido", value="pedido"),
     SelectOptionBuilder(label="❓ Pedir Ajuda", description="Clique para pedir ajuda ou tirar uma dúvida", value="ajuda")

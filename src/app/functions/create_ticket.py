@@ -1,6 +1,7 @@
 import discord 
 from discord import Interaction 
 from ..components.buttons.ticket_options import close_ticket_button
+from ..constants.constants import DEFAULT_EMBED_COLOR
 
 async def create_ticket(interaction: Interaction, member: discord.Member, choice: str):
     guild = interaction.guild 
@@ -21,7 +22,7 @@ async def create_ticket(interaction: Interaction, member: discord.Member, choice
             
         embed = discord.Embed(
             title="📩  Ticket Aberto",
-            color=discord.Colour.blue()
+            color=DEFAULT_EMBED_COLOR
         )
         
         embed.add_field(

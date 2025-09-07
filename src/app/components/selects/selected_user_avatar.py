@@ -1,13 +1,14 @@
 import discord 
 from core.builders.select_builder import SelectUserBuilder
 from core.builders.component_builder import ComponentBuilder
+from ...constants.constants import DEFAULT_EMBED_COLOR
 
 async def returns_user_avatar(interaction: discord.Interaction, select: discord.ui.Select) -> None:
     user = select.values[0]
     avatar = user.display_avatar 
     embed = discord.Embed(
         title=f"🖼 Avatar de {user.name}",
-        color=discord.Colour.blue() 
+        color=DEFAULT_EMBED_COLOR
     )
     embed.set_image(url=avatar.url)
 
