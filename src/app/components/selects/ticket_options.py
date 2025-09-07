@@ -1,7 +1,7 @@
 import discord 
 from core.builders.select_builder import SelectOptionBuilder, SelectMenuBuilder
 from core.builders.component_builder import ComponentBuilder
-from ...functions.ticket import create_ticket
+from ...functions.create_ticket import create_ticket
 
 
 options = [
