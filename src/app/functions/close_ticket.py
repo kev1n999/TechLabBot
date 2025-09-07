@@ -51,6 +51,10 @@ async def close_ticket(interaction: Interaction, button: discord.ui.Button):
                     name="FECHADOS"
                 )
             
+            await channel.edit(
+                category=close_tickets_category
+            )
+            
         elif content == "não" or content == "n":
             return
         

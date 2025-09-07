@@ -18,6 +18,14 @@ async def select_options_listener(interaction: discord.Interaction, select: disc
     elif choice == "ajuda":
         await create_ticket(interaction, interaction.user, choice)   
         
+    select.values.clear()
+    
+    await interaction.message.edit(view=ComponentBuilder(SelectMenuBuilder(
+        placeholder="Selecione uma opção...",
+        options=options, 
+        select_listener=select_options_listener
+    )))
+    
 select_menu_options = ComponentBuilder(SelectMenuBuilder(
     placeholder="Selecione uma opção...",
     options=options, 
