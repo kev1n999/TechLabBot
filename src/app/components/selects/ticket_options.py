@@ -4,18 +4,15 @@ from core.builders.component_builder import ComponentBuilder
 from ...functions.create_ticket import create_ticket
 
 options = [
-    SelectOptionBuilder(label="🤖 Fazer um pedido", description="Clique para iniciar um pedido", value="pedido"),
-    SelectOptionBuilder(label="❓ Pedir Ajuda", description="Clique para pedir ajuda ou tirar uma dúvida", value="ajuda")
+    SelectOptionBuilder(label="Fazer um pedido", description="Clique para iniciar um pedido", value="pedido"),
+    SelectOptionBuilder(label="Pedir Ajuda", description="Clique para pedir ajuda ou tirar uma dúvida", value="ajuda"),
+    SelectOptionBuilder(label="Solicitar um orçamento", description="Clique para solicitar um orçamento personalizado", value="orcamento")
 ]
 
 async def select_options_listener(interaction: discord.Interaction, select: discord.ui.Select):
     choice = select.values[0]
     
-    if choice == "pedido":
-        await create_ticket(interaction, interaction.user, choice)        
-    
-    elif choice == "ajuda":
-        await create_ticket(interaction, interaction.user, choice)   
+    await create_ticket(interaction, interaction.user, choice) 
         
     select.values.clear()
     
