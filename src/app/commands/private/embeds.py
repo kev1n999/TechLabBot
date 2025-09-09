@@ -123,6 +123,10 @@ class SendEmbeds(SlashCommandBuilder):
                     content=f"A embed foi enviada com sucesso para o canal {channels["price_channel"].mention}!",
                     ephemeral=True 
                 )    
+            
+            elif keyword.lower() == "":
+                ... 
+                
         except Exception as err:
             await interaction.response.send_message(
                 content=f"Ocorreu um erro ao tentar enviar a embed com a keyword `{keyword}`.", 

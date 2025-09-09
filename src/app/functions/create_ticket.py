@@ -12,6 +12,15 @@ async def create_ticket(interaction: Interaction, member: discord.Member, choice
         if not ticket_category:
             await guild.create_category(name="tickets")
             
+        if choice == "pedido":
+            choice = "Fazer um pedido"
+            
+        elif choice == "ajuda":
+            choice = "Tirar uma dúvida"
+            
+        elif choice == "orcamento":
+            choice = "Fazer um orçamento"
+            
         everyone_overwrites = discord.PermissionOverwrite(view_channel=False, send_messages=False)
         author_overwrites = discord.PermissionOverwrite(view_channel=True, send_messages=True)
             
@@ -33,7 +42,7 @@ async def create_ticket(interaction: Interaction, member: discord.Member, choice
         
         embed.add_field(
             name="Opção Escolhida",
-            value="`Fazer um pedido`" if choice == "pedido" else "`Tirar uma dúvida`",
+            value=f"`{choice}`",
             inline=True 
         )
         
