@@ -3,4 +3,5 @@ TICKET_CHANNEL_ID = 1410434390802305054
 
 EMOJIS = {
     "set": "<:set:1414719063846031462>",
+    "exclamacao": "<:exclamacao:1415061126114443376>"
 }
