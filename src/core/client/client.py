@@ -53,11 +53,12 @@ class DiscordClient(discord.Client):
         channel = discord.utils.get(member.guild.text_channels, id=self.welcome_channel_id)
         
         embed = discord.Embed(
-            title="Seja bem vindo a TechLab!",
-            color=discord.Colour.blue()
+            description=f"# Seja bem vindo a TechLab!",
+            color=0x242429
         )
         
         embed.set_image(url="https://media.discordapp.net/attachments/1414050304030150828/1414064011112087624/image.png?ex=68be353c&is=68bce3bc&hm=198f1f87621d527a9a9c0611403545c2b2d3156572fe5afe61d6aa7c506a5031&=&format=webp&quality=lossless")
+        embed.set_footer(text="TechLab - 2025")
         
         await channel.send(
             content=f"Seja bem vindo {member.mention}!",    

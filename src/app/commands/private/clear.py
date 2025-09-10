@@ -23,11 +23,13 @@ class ClearCommand(SlashCommandBuilder):
                 limit=amount 
             )
             
-            await interaction.response.send_message(
-                content=f"{len(del_messages)} mensagens foram deletadas neste canal.", 
-                ephemeral=True
-            )
+            if not interaction.response.is_done():
+                await interaction.followup.send(
+                    content=f"{len(del_messages)} mensagens foram deletadas neste canal.", 
+                    ephemeral=True
+                )
         except Exception as err:
+            print(err)
             await interaction.response.send_message(
                 content="Ocorreu um erro ao deletar as mensagens neste canal.",
                 ephemeral=True 
