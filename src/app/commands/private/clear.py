@@ -23,8 +23,13 @@ class ClearCommand(SlashCommandBuilder):
                 limit=amount 
             )
             
-            if not interaction.response.is_done():
+            if interaction.response.is_done() or interaction.is_expired():
                 await interaction.followup.send(
+                    content=f"{len(del_messages)} mensagens foram deletadas neste canal.", 
+                    ephemeral=True
+                )
+            else:
+                await interaction.response.send_message(
                     content=f"{len(del_messages)} mensagens foram deletadas neste canal.", 
                     ephemeral=True
                 )
