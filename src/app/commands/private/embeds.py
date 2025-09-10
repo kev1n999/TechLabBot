@@ -1,6 +1,8 @@
 import discord 
 from core.builders.command_builder import SlashCommandBuilder
 from ...constants.constants import DEFAULT_EMBED_COLOR, TICKET_CHANNEL_ID, EMOJIS
+from ...layouts.container import LayoutIrado
+from discord import ui, SeparatorSpacing
 
 class SendEmbeds(SlashCommandBuilder):
     def __init__(self, tree):
@@ -22,37 +24,34 @@ class SendEmbeds(SlashCommandBuilder):
         
         try:
             if keyword.lower() == "prices":
-                price_embed = discord.Embed(
-                    description="# **Serviços e Preços**\nConfira abaixo como funcionam nossos serviços e a precificação para cada tipo de projeto:",
-                    color=DEFAULT_EMBED_COLOR  
-                )
+                l = LayoutIrado()
+                container = ui.Container(ui.TextDisplay('# Serviços e Preços'))
+                container.add_item(ui.Separator(spacing=SeparatorSpacing.large))
+
+                container.add_item(ui.TextDisplay('### Como fazer um pedido?'))
+                container.add_item(ui.TextDisplay(f'{EMOJIS['set']} Simples! para fazer um pedido na TechLab, você deverá abrir um ticket de atendimento em: <#1410434390802305054>'))
                 
-                price_embed.add_field(
-                    name="<:set:1414719063846031462> Como Funciona",
-                    value=f"• Os preços variam de acordo com a complexidade do projeto e o prazo de entrega.\n• Garantimos suporte e qualidade em todos os projetos.\nSolicite um orçamento em: {ticket_channel.mention}",
-                    inline=True 
-                )
-                
-                price_embed.add_field(
-                    name="<:set:1414719063846031462> Valores Mínimos",
-                    value="• **Bots:** 80€ / R$ 150,00\n• **Automações:** 150€ / R$ 250,00\n• **Sites:** 150€ / R$ 350,00",
-                    inline=False 
-                )
-                
-                price_embed.add_field(
-                    name="<:set:1414719063846031462> Métodos de Pagamento",
-                    value="• <:paypal:1414721354795843605> PayPal\n• <:pix:1414721358096764959> PIX",
-                    inline=True 
+                container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
+
+                container.add_item(ui.TextDisplay('### Quais são os valores minimos?'))
+                container.add_item(ui.TextDisplay(f'{EMOJIS['set']} Bots: 80€ / R$ 150,00'))
+                container.add_item(ui.TextDisplay(f'{EMOJIS['set']} Automações: 150€ / R$ 250,00'))
+                container.add_item(ui.TextDisplay(f'{EMOJIS['set']} Sites: 150€ / R$ 350,00'))
+
+                container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
+
+                container.add_item(ui.TextDisplay('### Quais os metodos de pagamento disponíveis?'))
+                container.add_item(ui.TextDisplay(f'{EMOJIS['set']} No momento apenas aceitamos PIX & Paypal'))
+
+
+                l.add_item(container)
+
+                await channels["price_channel"].send(
+                    embed=rules_embed
                 )
 
-                price_embed.set_footer(text="Techlab - 2025")
-                
-                await channels["price_channel"].send(
-                    embed=price_embed 
-                )
-                
                 await interaction.response.send_message(
-                    content=f"A embed foi enviada com sucesso para o canal {channels["price_channel"].mention}!",
+                    content='enviado lol',
                     ephemeral=True 
                 )
                 
@@ -128,6 +127,7 @@ class SendEmbeds(SlashCommandBuilder):
                 ... 
                 
         except Exception as err:
+            print(err)
             await interaction.response.send_message(
                 content=f"Ocorreu um erro ao tentar enviar a embed com a keyword `{keyword}`.", 
                 ephemeral=True 
