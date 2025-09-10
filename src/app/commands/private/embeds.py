@@ -17,7 +17,8 @@ class SendEmbeds(SlashCommandBuilder):
         
         channels = {
             "price_channel": discord.utils.get(guild.text_channels, id=1413989899027218452),
-            "rules_channel": discord.utils.get(guild.text_channels, id=1410430056479850639)
+            "rules_channel": discord.utils.get(guild.text_channels, id=1410430056479850639),
+            "tips_channel": discord.utils.get(guild.text_channels, id=1410430056479850640)
         }
         
         ticket_channel = discord.utils.get(guild.text_channels, id=TICKET_CHANNEL_ID)
@@ -123,9 +124,46 @@ class SendEmbeds(SlashCommandBuilder):
                     ephemeral=True 
                 )    
             
-            elif keyword.lower() == "":
-                ... 
+            elif keyword.lower() == "tips":
+                embed = discord.Embed(
+                    description=f"# Como funciona?",
+                    color=DEFAULT_EMBED_COLOR 
+                )
                 
+                embed.add_field(
+                    name=f"{EMOJIS['set']} Como fazer um pedido?",
+                    value=f"Para fazer um pedido na TechLab, você deverá abrir um ticket de atendimento em: {ticket_channel.mention}",
+                    inline=True 
+                )
+                
+                embed.add_field(
+                    name=f"{EMOJIS['set']} Como fazer um orçamento personalizado?",
+                    value=f"Para fazer um orçamento personalizado, abra um ticket de atendimento selecionando a opção `Solicitar um Orçamento` em: {ticket_channel.mention}",
+                    inline=False 
+                )
+                
+                embed.add_field(
+                    name=f"{EMOJIS['set']} Como funciona o pagamento?",
+                    value=f"Para acessar informações como valores e métodos de pagamento, vá para: {channels['price_channel'].mention}",
+                    inline=True
+                )
+                
+                embed.add_field(
+                    name=f"{EMOJIS['exclamacao']} Atenção",
+                    value="Em todo pedido e negociação de projetos, será cobrado um valor fixo de 40% do valor total adiantado.",
+                    inline=False
+                )
+                
+                embed.set_footer(text="TechLab - 2025")
+                
+                await channels["tips_channel"].send(
+                    embed=embed 
+                )
+                
+                await interaction.response.send_message(
+                    content=f"Mensagem de dicas enviada com sucesso para o canal {channels['tips_channel'].mention}",
+                    ephemeral=True
+                )
         except Exception as err:
             print(err)
             await interaction.response.send_message(
