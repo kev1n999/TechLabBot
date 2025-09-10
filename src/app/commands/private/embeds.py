@@ -1,8 +1,7 @@
-import discord 
+import discord
 from core.builders.command_builder import SlashCommandBuilder
-from ...constants.constants import DEFAULT_EMBED_COLOR, TICKET_CHANNEL_ID, EMOJIS
-from ...layouts.container import LayoutIrado
-from discord import ui, SeparatorSpacing
+from ...constants.constants import TICKET_CHANNEL_ID
+from ...components.layouts.containers import PricesLayout, TipsLayout, RulesLayout
 
 class SendEmbeds(SlashCommandBuilder):
     def __init__(self, tree):
@@ -11,162 +10,33 @@ class SendEmbeds(SlashCommandBuilder):
             name="send-embed",
             description="Envia embeds estáticas para determinado canal da loja."
         )
-        
+
     async def callback(self, interaction: discord.Interaction, keyword: str):
-        guild = interaction.guild 
-        
+        guild = interaction.guild
+
         channels = {
             "price_channel": discord.utils.get(guild.text_channels, id=1413989899027218452),
             "rules_channel": discord.utils.get(guild.text_channels, id=1410430056479850639),
             "tips_channel": discord.utils.get(guild.text_channels, id=1410430056479850640)
         }
-        
         ticket_channel = discord.utils.get(guild.text_channels, id=TICKET_CHANNEL_ID)
-        
+
         try:
             if keyword.lower() == "prices":
-                l = LayoutIrado()
-                container = ui.Container(ui.TextDisplay('# Serviços e Preços'))
-                container.add_item(ui.Separator(spacing=SeparatorSpacing.large))
+                layout = PricesLayout(ticket_channel)
+                await channels["price_channel"].send(view=layout)
+                await interaction.response.send_message(f"A mensagem foi enviada para {channels['price_channel'].mention}!", ephemeral=True)
 
-                container.add_item(ui.TextDisplay('### Como fazer um pedido?'))
-                container.add_item(ui.TextDisplay(f'{EMOJIS['set']} Simples! para fazer um pedido na TechLab, você deverá abrir um ticket de atendimento em: <#1410434390802305054>'))
-                
-                container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
-
-                container.add_item(ui.TextDisplay('### Quais são os valores minimos?'))
-                container.add_item(ui.TextDisplay(f'{EMOJIS['set']} Bots: 80€ / R$ 150,00'))
-                container.add_item(ui.TextDisplay(f'{EMOJIS['set']} Automações: 150€ / R$ 250,00'))
-                container.add_item(ui.TextDisplay(f'{EMOJIS['set']} Sites: 150€ / R$ 350,00'))
-
-                container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
-
-                container.add_item(ui.TextDisplay('### Quais os metodos de pagamento disponíveis?'))
-                container.add_item(ui.TextDisplay(f'{EMOJIS['set']} No momento apenas aceitamos PIX & Paypal'))
-
-
-                l.add_item(container)
-
-                await channels["price_channel"].send(
-                    embed=rules_embed
-                )
-
-                await interaction.response.send_message(
-                    content='enviado lol',
-                    ephemeral=True 
-                )
-                
             elif keyword.lower() == "rules":
-                rules_embed = discord.Embed(
-                    description='# Regras da TechLab\nSiga as regras abaixo para manter a comunidade saudável e produtiva.',
-                    color=DEFAULT_EMBED_COLOR
-                    )
-                
-                rules_embed.add_field(
-                    name=f'{EMOJIS["set"]} Respeito acima de tudo',
-                    value='Trate todos os membros com educação e respeito. Ofensas, discriminação ou ataques não serão tolerados.',
-                    inline=False
-                )
+                layout = RulesLayout()
+                await channels["rules_channel"].send(view=layout)
+                await interaction.response.send_message(f"A mensagem foi enviada para {channels['rules_channel'].mention}!", ephemeral=True)
 
-
-                rules_embed.add_field(
-                    name=f'{EMOJIS["set"]} Sem spam ou publicidade',
-                    value='Não envie links ou promoções de outros serviços sem permissão da equipe. O foco é bots, automações e sites.',
-                    inline=False
-                )
-
-
-                rules_embed.add_field(
-                    name=f'{EMOJIS["set"]} Pedidos e vendas',
-                    value=('Negociações devem ocorrer nos canais corretos.\n'
-                    'Fornecedores devem mostrar portfólio ou exemplos.\n'
-                    'Compradores: verifiquem os serviços antes de pagar.\n'
-                    'A equipe pode mediar disputas, mas não se responsabiliza por golpes.'),
-                    inline=False
-                )
-
-
-                rules_embed.add_field(
-                    name=f'{EMOJIS["set"]} Conteúdo permitido',
-                    value='Somente conteúdos relacionados a tecnologia, bots, automações e desenvolvimento web. Conteúdos NSFW, pirataria ou ilegais são proibidos.',
-                    inline=False
-                )
-
-
-                rules_embed.add_field(
-                    name=f'{EMOJIS["set"]} Canais de suporte',
-                    value='Use os canais de suporte para dúvidas, feedback ou problemas com serviços contratados. Evite marcar membros ou a equipe sem necessidade.',
-                    inline=False
-                )
-
-
-                rules_embed.add_field(
-                    name=f'{EMOJIS["set"]} Canais de voz',
-                    value='Seja educado e evite ruídos ou interrupções. Conversas fora do tema podem ser redirecionadas para canais de bate-papo.',
-                    inline=False
-                )
-
-
-                rules_embed.add_field(
-                    name=f'{EMOJIS["set"]} Penalidades',
-                    value='Quebra de regras pode resultar em advertência, mute, kick ou banimento, dependendo da gravidade.',
-                    inline=False
-                )
-
-                rules_embed.set_footer(text='TechLab - 2025')
-                
-                await channels["rules_channel"].send(
-                    embed=rules_embed
-                ) 
-                
-                await interaction.response.send_message(
-                    content=f"A embed foi enviada com sucesso para o canal {channels["price_channel"].mention}!",
-                    ephemeral=True 
-                )    
-            
             elif keyword.lower() == "tips":
-                embed = discord.Embed(
-                    description=f"# Como funciona?",
-                    color=DEFAULT_EMBED_COLOR 
-                )
-                
-                embed.add_field(
-                    name=f"{EMOJIS['set']} Como fazer um pedido?",
-                    value=f"Para fazer um pedido na TechLab, você deverá abrir um ticket de atendimento em: {ticket_channel.mention}",
-                    inline=True 
-                )
-                
-                embed.add_field(
-                    name=f"{EMOJIS['set']} Como fazer um orçamento personalizado?",
-                    value=f"Para fazer um orçamento personalizado, abra um ticket de atendimento selecionando a opção `Solicitar um Orçamento` em: {ticket_channel.mention}",
-                    inline=False 
-                )
-                
-                embed.add_field(
-                    name=f"{EMOJIS['set']} Como funciona o pagamento?",
-                    value=f"Para acessar informações como valores e métodos de pagamento, vá para: {channels['price_channel'].mention}",
-                    inline=True
-                )
-                
-                embed.add_field(
-                    name=f"{EMOJIS['exclamacao']} Atenção",
-                    value="Em todo pedido e negociação de projetos, será cobrado um valor fixo de 40% do valor total adiantado.",
-                    inline=False
-                )
-                
-                embed.set_footer(text="TechLab - 2025")
-                
-                await channels["tips_channel"].send(
-                    embed=embed 
-                )
-                
-                await interaction.response.send_message(
-                    content=f"Mensagem de dicas enviada com sucesso para o canal {channels['tips_channel'].mention}",
-                    ephemeral=True
-                )
+                layout = TipsLayout(ticket_channel, channels["price_channel"])
+                await channels["tips_channel"].send(view=layout)
+                await interaction.response.send_message(f"A mensagem foi enviada para {channels['tips_channel'].mention}!", ephemeral=True)
+
         except Exception as err:
             print(err)
-            await interaction.response.send_message(
-                content=f"Ocorreu um erro ao tentar enviar a embed com a keyword `{keyword}`.", 
-                ephemeral=True 
-            )
+            await interaction.response.send_message(f"Ocorreu um erro ao enviar a mensagem: {err}", ephemeral=True)
