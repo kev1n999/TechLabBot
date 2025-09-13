@@ -1,8 +1,19 @@
 import discord
 from discord import Interaction
+from core.builders.component_builder import ComponentBuilder
+from core.builders.button_builder import ButtonBuilder
+from .delete_ticket import delete_ticket
 
+delete_ticket_button = ComponentBuilder(ButtonBuilder(
+    label="Deletar",
+    color="red",
+    custom_id="delete-ticket",
+    button_listener=delete_ticket
+))
+                                        
 async def close_ticket(interaction: Interaction, button: discord.ui.Button):
-    channel = interaction.channel 
+    channel = interaction.channel  
+    message = interaction.message 
     
     if not interaction.user.guild_permissions.administrator:
         await interaction.response.send_message(
@@ -54,7 +65,13 @@ async def close_ticket(interaction: Interaction, button: discord.ui.Button):
             await channel.edit(
                 category=close_tickets_category
             )
-            
+
+            embed = message.embeds[0]
+            embed.add_field(name="Status", value="`Fechado`", inline=True)
+                    
+            await message.edit(
+                view=delete_ticket_button
+            )
         elif content == "não" or content == "n":
             return
         

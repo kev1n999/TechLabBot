@@ -1,11 +1,11 @@
 import discord 
 from discord import Interaction 
-from ..components.buttons.ticket_options import close_ticket_button
+from ..components.buttons.ticket_options import ticket_buttons
 from ..constants.constants import DEFAULT_EMBED_COLOR
 
 async def create_ticket(interaction: Interaction, member: discord.Member, choice: str):
     guild = interaction.guild 
-
+            
     try:    
         ticket_category = discord.utils.get(guild.categories, id=1410706150910984212)
             
@@ -55,7 +55,7 @@ async def create_ticket(interaction: Interaction, member: discord.Member, choice
             content=f"Seu ticket foi aberto com sucesso em {ticket_channel.mention}!",
             ephemeral=True 
         )
-        
-        await ticket_channel.send("Olá {}, Seja bem vindo ao seu ticket!".format(member.mention), embed=embed, view=close_ticket_button)
+            
+        await ticket_channel.send("Olá {}, Seja bem vindo ao seu ticket!".format(member.mention), embed=embed, view=ticket_buttons)
     except:
         pass 

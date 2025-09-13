@@ -27,4 +27,8 @@ class TicketSystemCommand(SlashCommandBuilder):
                 ephemeral=True 
             )
         except:
-            pass 
+            await interaction.response.send_message(
+                content="Ocorreu um erro ao tentar enviar a mensagem para abertura de tickes.",
+                ephemeral=True
+            )
+        

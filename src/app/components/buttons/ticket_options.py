@@ -1,10 +1,9 @@
-import discord 
 from core.builders.button_builder import ButtonBuilder
 from core.builders.component_builder import ComponentBuilder
 from ...functions.close_ticket import close_ticket
 from ...functions.delete_ticket import delete_ticket
 
-close_ticket_button = ComponentBuilder(
+ticket_buttons = ComponentBuilder(
     [
         ButtonBuilder(
             label="Fechar",
