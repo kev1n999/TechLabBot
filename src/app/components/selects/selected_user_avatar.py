@@ -20,4 +20,4 @@ selected_user = ComponentBuilder(SelectUserBuilder(
     placeholder="Selecione um usuário...",
     custom_id="sel-user",
     select_listener=returns_user_avatar
-))
+), persistent=True)

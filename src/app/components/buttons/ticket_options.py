@@ -18,5 +18,6 @@ ticket_buttons = ComponentBuilder(
             custom_id="delete-ticket",
             button_listener=delete_ticket
         )
-    ]
+    ],
+    persistent=True 
 )
