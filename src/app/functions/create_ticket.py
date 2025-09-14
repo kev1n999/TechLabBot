@@ -43,13 +43,15 @@ async def create_ticket(interaction: Interaction, member: discord.Member, choice
         embed.add_field(
             name="Opção Escolhida",
             value=f"`{choice}`",
-            inline=True 
+            inline=False
         )
         
         embed.set_footer(
             text="TechLab - 2025",
             icon_url=interaction.client.user.display_avatar
         )
+        
+        embed.set_thumbnail(url=member.display_avatar)
         
         await interaction.response.send_message(
             content=f"Seu ticket foi aberto com sucesso em {ticket_channel.mention}!",

@@ -70,7 +70,8 @@ async def close_ticket(interaction: Interaction, button: discord.ui.Button):
             embed.add_field(name="Status", value="`Fechado`", inline=True)
                     
             await message.edit(
-                view=delete_ticket_button
+                view=delete_ticket_button,
+                embed=embed
             )
         elif content == "não" or content == "n":
             return
