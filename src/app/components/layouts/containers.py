@@ -2,15 +2,15 @@ from ...constants.constants import EMOJIS
 from discord import ui, SeparatorSpacing
 
 class PricesLayout(ui.LayoutView):
-    def __init__(self, ticket_channel):
+    def __init__(self):
         super().__init__()
 
-        container = ui.Container(ui.TextDisplay('# Serviços e Preços'))
+        container = ui.Container(ui.TextDisplay('# 💸 Serviços e Preços'))
         container.add_item(ui.Separator(spacing=SeparatorSpacing.large))
 
         container.add_item(ui.TextDisplay('### Como fazer um pedido?'))
         container.add_item(
-            ui.TextDisplay(f'{EMOJIS["set"]} Para fazer um pedido na TechLab, abra um ticket em: {ticket_channel.mention}')
+            ui.TextDisplay(f'{EMOJIS["set"]} Para fazer um pedido na TechLab, abra um ticket em: <#1415398458432553152>')
         )
         container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
 
@@ -30,7 +30,7 @@ class RulesLayout(ui.LayoutView):
     def __init__(self):
         super().__init__()
 
-        container = ui.Container(ui.TextDisplay('# Regras da TechLab'))
+        container = ui.Container(ui.TextDisplay('# 📜 Regras da TechLab'))
         container.add_item(ui.Separator(spacing=SeparatorSpacing.large))
 
         rules = [
@@ -52,16 +52,16 @@ class RulesLayout(ui.LayoutView):
 
 
 class TipsLayout(ui.LayoutView):
-    def __init__(self, ticket_channel, price_channel):
+    def __init__(self):
         super().__init__()
 
-        container = ui.Container(ui.TextDisplay('# Dicas e Informações'))
+        container = ui.Container(ui.TextDisplay('# 💡 Dicas e Informações'))
         container.add_item(ui.Separator(spacing=SeparatorSpacing.large))
 
         tips = [
-            (f'{EMOJIS["set"]} Como fazer um pedido?', f'Abra um ticket em: {ticket_channel.mention}'),
-            (f'{EMOJIS["set"]} Como fazer um orçamento?', f'Abra um ticket em: {ticket_channel.mention} e selecione "Solicitar Orçamento"'),
-            (f'{EMOJIS["set"]} Pagamento', f'Informações de valores e métodos estão em {price_channel.mention}'),
+            (f'{EMOJIS["set"]} Como fazer um pedido?', f'Abra um ticket em: <#1415398458432553152>'),
+            (f'{EMOJIS["set"]} Como fazer um orçamento?', f'Abra um ticket em: <#1415398458432553152> e selecione "Solicitar Orçamento"'),
+            (f'{EMOJIS["set"]} Pagamento', f'Informações de valores e métodos estão em <#1413989899027218452>'),
             (f'{EMOJIS["exclamacao"]} Atenção', 'Será cobrado 40% do valor total adiantado em todos os pedidos.')
         ]
 
@@ -69,5 +69,36 @@ class TipsLayout(ui.LayoutView):
             container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
             container.add_item(ui.TextDisplay(f'### {title}'))
             container.add_item(ui.TextDisplay(desc))
+
+        self.add_item(container)
+
+class AboutLayout(ui.LayoutView):
+    def __init__(self):
+        super().__init__()
+
+        container = ui.Container(ui.TextDisplay('# 🚀 Sobre a TechLab'))
+        container.add_item(ui.Separator(spacing=SeparatorSpacing.large))
+
+        container.add_item(ui.TextDisplay(
+            'A TechLab é uma loja focada no desenvolvimento de projetos digitais que resolvam determinados tipos de problemas. '
+            'Nosso principal objetivo é fornecer soluções de qualidade que resolvam os problemas de nossos clientes.'
+        ))
+        container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
+
+        container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} **Principais tipos de soluções**'))
+        container.add_item(ui.TextDisplay(
+            '> - Bots (Para servidores de Discord, Telegram etc)\n'
+            '> - Automações Web (Bots que realizam requisições e atividades automáticas em sites e páginas da internet)\n'
+            '> - Sites e Landing-Pages'
+        ))
+        container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
+
+        container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} **Saiba mais**'))
+        container.add_item(ui.TextDisplay(f'### - Regras importantes\nÉ extremamente importante seguir todas as regras apresentadas em <#1415385901944803510> para evitar qualquer tipo de punição ou mal-entendido.'))
+        container.add_item(ui.TextDisplay(f'### - Como funciona a venda\nSaiba mais sobre como funciona a venda e compra das nossas soluções: <#1410430056479850640>'))
+        container.add_item(ui.TextDisplay(f'### - Precificação e orçamentos\nTenha mais informações sobre a precificação e orçamentos: <#1413989899027218452>'))
+        container.add_item(ui.Separator(spacing=SeparatorSpacing.large))
+
+        container.add_item(ui.TextDisplay('-# TechLab - 2025'))
 
         self.add_item(container)
