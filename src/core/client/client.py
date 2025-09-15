@@ -54,10 +54,17 @@ class DiscordClient(discord.Client):
         )
         
     async def on_member_join(self, member: discord.Member):
+        if member.bot:
+            bot_role = member.guild.get_role(1417240352250789908)
+            await member.add_roles(bot_role)
+        else:
+            member_role = member.guild.get_role(1410430055984922777)
+            await member.add_roles(member_role)
+        
         channel = discord.utils.get(member.guild.text_channels, id=self.welcome_channel_id)
         
         embed = discord.Embed(
-            description=f"# 👋🏻 Seja bem vindo a TechLab!",
+            description=f"# 👋🏻 Seja bem vindo a TechLab!\n",
             color=0x242429
         )
         
