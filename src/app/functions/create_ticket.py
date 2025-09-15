@@ -20,6 +20,9 @@ async def create_ticket(interaction: Interaction, member: discord.Member, choice
             
         elif choice == "orcamento":
             choice = "Fazer um orçamento"
+        
+        elif choice == "parceria":
+            choice = "Solicitar uma parceria"
             
         everyone_overwrites = discord.PermissionOverwrite(view_channel=False, send_messages=False)
         author_overwrites = discord.PermissionOverwrite(view_channel=True, send_messages=True)

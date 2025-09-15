@@ -6,7 +6,8 @@ from ...functions.create_ticket import create_ticket
 options = [
     SelectOptionBuilder(label="Fazer um pedido", description="Clique para iniciar um pedido", value="pedido"),
     SelectOptionBuilder(label="Pedir Ajuda", description="Clique para pedir ajuda ou tirar uma dúvida", value="ajuda"),
-    SelectOptionBuilder(label="Solicitar um orçamento", description="Clique para solicitar um orçamento personalizado", value="orcamento")
+    SelectOptionBuilder(label="Solicitar um orçamento", description="Clique para solicitar um orçamento personalizado", value="orcamento"),
+    SelectOptionBuilder(label="Solicitar uma parceria", description="Clique para solicitar uma parceria", value="parceria")
 ]
 
 async def select_options_listener(interaction: discord.Interaction, select: discord.ui.Select):
