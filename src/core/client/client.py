@@ -49,6 +49,10 @@ class DiscordClient(discord.Client):
     async def on_ready(self):
         logger.info(f"Bot está online como {self.user.name} (ID: {self.user.id})")
         
+        await self.change_presence(
+            activity=discord.Game("Entregando soluções eficientes para seus problemas!")
+        )
+        
     async def on_member_join(self, member: discord.Member):
         channel = discord.utils.get(member.guild.text_channels, id=self.welcome_channel_id)
         
