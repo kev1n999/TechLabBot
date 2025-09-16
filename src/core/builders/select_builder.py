@@ -57,11 +57,13 @@ class SelectMenuBuilder(discord.ui.Select):
         placeholder: str=None, 
         options: Union[List[SelectOptionBuilder], SelectOptionBuilder]=None, 
         *, 
-        select_listener: Callable[[discord.Interaction, discord.ui.Select], Awaitable[None]]
+        select_listener: Callable[[discord.Interaction, discord.ui.Select], Awaitable[None]],
+        custom_id: str=None 
     ) -> None:
         super().__init__(
             placeholder=placeholder,
-            options=options
+            options=options, 
+            custom_id=custom_id
         )
         self.select_listener = select_listener 
         

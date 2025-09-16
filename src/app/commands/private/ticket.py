@@ -13,7 +13,7 @@ class TicketSystemCommand(SlashCommandBuilder):
         
     async def callback(self, interaction: discord.Interaction, channel: discord.TextChannel):
         embed = discord.Embed(
-            description="# Abra seu Ticket\nPara iniciar um atendimento, abra um ticket clicando no botão abaixo e aguarde ser atendido!",
+            description="# ✉️ Abra seu Ticket\nPara iniciar um atendimento, abra um ticket clicando no botão abaixo e aguarde ser atendido!",
             color=DEFAULT_EMBED_COLOR
         )
         

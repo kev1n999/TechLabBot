@@ -20,11 +20,13 @@ async def select_options_listener(interaction: discord.Interaction, select: disc
     await interaction.message.edit(view=ComponentBuilder(SelectMenuBuilder(
         placeholder="Selecione uma opção...",
         options=options, 
-        select_listener=select_options_listener
+        select_listener=select_options_listener,
+        custom_id="selected-option"
     )))
     
 select_menu_options = ComponentBuilder(SelectMenuBuilder(
     placeholder="Selecione uma opção...",
     options=options, 
-    select_listener=select_options_listener
+    select_listener=select_options_listener,
+    custom_id="selected-option" 
 ), persistent=True)

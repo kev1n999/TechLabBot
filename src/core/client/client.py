@@ -47,6 +47,12 @@ class DiscordClient(discord.Client):
         logger.info("Comandos sincronizados com sucesso")
         
     async def on_ready(self):
+        from app.components.selects.ticket_options import select_menu_options
+        from app.components.buttons.ticket_options import ticket_buttons
+        
+        self.add_view(select_menu_options)
+        self.add_view(ticket_buttons)
+        
         logger.info(f"Bot está online como {self.user.name} (ID: {self.user.id})")
         
         await self.change_presence(
