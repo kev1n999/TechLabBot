@@ -1,10 +1,13 @@
 DEFAULT_EMBED_COLOR = 0x242429
 TICKET_CHANNEL_ID = 1410434390802305054
+FEEDBACK_CHANNEL_ID = 1421171570897846523
 
 EMOJIS = {
     "set": "<:set:1414719063846031462>",
     "paypal": "<:paypal:1414721354795843605>",
     "pix": "<:pix:1414721358096764959>",
     "exclamacao": "<:exclamacao:1415061126114443376>",
-    "user": "<:user:1414719478436204696>"
+    "user": "<:user:1414719478436204696>",
+    "starfull": "<:starfull:1421520406703116410>",
+    "starvoid": "<:starvoid:1421520408414257262>"
 }
