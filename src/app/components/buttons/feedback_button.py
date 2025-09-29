@@ -1,5 +1,6 @@
 from discord import ButtonStyle, Interaction, ui
 from core.builders.button_builder import ButtonBuilder
+from core.builders.component_builder import ComponentBuilder
 from ...components.modals.feedback_modal import feedback_modal
 from ...constants.constants import CLIENT_ROLE_ID
 
@@ -21,3 +22,13 @@ feedback_button = ui.ActionRow(ButtonBuilder(
     custom_id="feedback-button",
     button_listener=feedback_button_listener
 ))
+
+feedback_button_view = ComponentBuilder(
+    ButtonBuilder(
+        label="Avalie a TechLab",
+        color=ButtonStyle.secondary,
+        custom_id="feedback-button",
+        button_listener=feedback_button_listener
+    ),
+    persistent=True
+)

@@ -49,9 +49,11 @@ class DiscordClient(discord.Client):
     async def on_ready(self):
         from app.components.selects.ticket_options import select_menu_options
         from app.components.buttons.ticket_options import ticket_buttons
+        from app.components.buttons.feedback_button import feedback_button_view
         
         self.add_view(select_menu_options)
         self.add_view(ticket_buttons)
+        self.add_view(feedback_button_view)
         
         logger.info(f"Bot está online como {self.user.name} (ID: {self.user.id})")
         
