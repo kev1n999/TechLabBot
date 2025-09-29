@@ -1,6 +1,5 @@
 import discord
 from core.builders.command_builder import SlashCommandBuilder
-from ...constants.constants import TICKET_CHANNEL_ID
 from ...components.layouts.containers import PricesLayout, TipsLayout, RulesLayout, AboutLayout
 
 class SendEmbeds(SlashCommandBuilder):
@@ -13,21 +12,43 @@ class SendEmbeds(SlashCommandBuilder):
 
     async def callback(self, interaction: discord.Interaction, keyword: str):
         guild = interaction.guild
-
+        channel = interaction.channel 
+        
         price_channel = guild.get_channel(1413989899027218452)
         rules_channel = guild.get_channel(1415385901944803510)
         tips_channel = guild.get_channel(1410430056479850640)
-        ticket_channel = guild.get_channel(TICKET_CHANNEL_ID)
         about_channel = guild.get_channel(1416464766473474169)
         
         try:
             if keyword.lower() == "prices":
-                layout = PricesLayout()
-                await price_channel.send(view=layout)
-                await interaction.response.send_message(
-                    f"A mensagem foi enviada para {price_channel.mention}!", ephemeral=True
+                await interaction.channel.send(
+                    content="Defina o preço para o serviço de bots(Em Euro e Real), ex: `10€ / R$ 10,00`"
                 )
-
+                bot_price = await interaction.client.wait_for("message", check=lambda m: m.author.id == interaction.user.id, timeout=15.0)
+                
+                if bot_price.content.lower() == "null" or bot_price.content.lower() == "none":
+                    bot_price, site_price, automation_price = (None, None, None) 
+                
+                else:
+                    await channel.send(
+                        content="Defina o preço para o serviço de sites(Em Euro e Real)" 
+                    )
+                    site_price = await interaction.client.wait_for("message", check=lambda m: m.author.id == interaction.user.id, timeout=15.0)
+                    
+                    await channel.send(
+                        content="Defina o preço para o serviço de automações(Em Euro e Real)" 
+                    )
+                    automation_price = await interaction.client.wait_for("message", check=lambda m: m.author.id == interaction.user.id, timeout=15.0)
+                    bot_price, site_price, automation_price = (bot_price.content, site_price.content, automation_price.content)
+                    
+                layout = PricesLayout(bot_price, site_price, automation_price)
+                
+                await price_channel.send(view=layout)
+                
+                await interaction.response.send_message(
+                    f"A mensagem foi enviada para {price_channel.mention}!"
+                )
+                
             elif keyword.lower() == "rules":
                 layout = RulesLayout()
                 await rules_channel.send(view=layout)

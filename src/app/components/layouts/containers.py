@@ -2,7 +2,7 @@ from ...constants.constants import EMOJIS
 from discord import ui, SeparatorSpacing
 
 class PricesLayout(ui.LayoutView):
-    def __init__(self):
+    def __init__(self, bot_price: str=None, site_price: str=None, automation_price: str=None):
         super().__init__()
 
         container = ui.Container(ui.TextDisplay('# 💸 Serviços e Preços'))
@@ -15,17 +15,16 @@ class PricesLayout(ui.LayoutView):
         container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
 
         container.add_item(ui.TextDisplay('### Valores mínimos'))
-        container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} Bots: 80€ / R$ 150,00'))
-        container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} Automações: 150€ / R$ 250,00'))
-        container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} Sites: 150€ / R$ 350,00'))
+        container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} Bots: {"80€ / R$ 150,00" if bot_price is None else bot_price}'))
+        container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} Automações: {"150€ / R$ 250,00" if automation_price is None else automation_price}'))
+        container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} Sites: {"150€ / R$ 350,00" if site_price is None else site_price}'))
         container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
 
         container.add_item(ui.TextDisplay('### Métodos de pagamento'))
         container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} PIX & PayPal'))
-
+        
         self.add_item(container)
-
-
+        
 class RulesLayout(ui.LayoutView):
     def __init__(self):
         super().__init__()
