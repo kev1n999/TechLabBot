@@ -125,7 +125,7 @@ class FeedbackLayout(ui.LayoutView):
         container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} **Como avaliar**'))
         container.add_item(ui.TextDisplay(
             '> - Clique no botão abaixo "Avalie a TechLab"(Um formulário será aberto)\n'
-            '> - Preencha a quantidade de estrelas que vocẽ nos dá(em um número inteiro de 1 a 5)\n'
+            '> - Preencha a quantidade de estrelas que você nos dá(em um número inteiro de 1 a 5)\n'
             '> - Faça uma descrição/feedback sobre sua experiência com os nossos serviços'
             '> - Responda se vocẽ recomenda a TechLab'
         ))
