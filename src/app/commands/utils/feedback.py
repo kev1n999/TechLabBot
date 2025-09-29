@@ -1,3 +1,4 @@
+'''
 import discord 
 from core.builders.command_builder import SlashCommandBuilder
 from ...components.modals.feedback_modal import feedback_modal
@@ -12,3 +13,4 @@ class FeedbackCommand(SlashCommandBuilder):
         
     async def callback(self, interaction: discord.Interaction):
         await interaction.response.send_modal(feedback_modal)
+'''

@@ -1,5 +1,6 @@
 from ...constants.constants import EMOJIS
 from discord import ui, SeparatorSpacing
+from ...components.buttons.feedback_button import feedback_button
 
 class PricesLayout(ui.LayoutView):
     def __init__(self, bot_price: str=None, site_price: str=None, automation_price: str=None):
@@ -23,6 +24,8 @@ class PricesLayout(ui.LayoutView):
         container.add_item(ui.TextDisplay('### Métodos de pagamento'))
         container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} PIX & PayPal'))
         
+        container.add_item(ui.TextDisplay('-# TechLab - 2025'))
+                
         self.add_item(container)
         
 class RulesLayout(ui.LayoutView):
@@ -46,7 +49,9 @@ class RulesLayout(ui.LayoutView):
             container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
             container.add_item(ui.TextDisplay(f'### {EMOJIS["set"]} {title}'))
             container.add_item(ui.TextDisplay(desc))
-
+        
+        container.add_item(ui.TextDisplay('-# TechLab - 2025'))
+        
         self.add_item(container)
 
 
@@ -68,7 +73,9 @@ class TipsLayout(ui.LayoutView):
             container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
             container.add_item(ui.TextDisplay(f'### {title}'))
             container.add_item(ui.TextDisplay(desc))
-
+            
+        container.add_item(ui.TextDisplay('-# TechLab - 2025'))
+        
         self.add_item(container)
 
 class AboutLayout(ui.LayoutView):
@@ -98,6 +105,32 @@ class AboutLayout(ui.LayoutView):
         container.add_item(ui.TextDisplay(f'### - Precificação e orçamentos\nTenha mais informações sobre a precificação e orçamentos: <#1413989899027218452>'))
         container.add_item(ui.Separator(spacing=SeparatorSpacing.large))
 
+        container.add_item(ui.TextDisplay('-# TechLab - 2025'))
+
+        self.add_item(container)
+
+class FeedbackLayout(ui.LayoutView):
+    def __init__(self):
+        super().__init__()
+
+        container = ui.Container(ui.TextDisplay(f'# {EMOJIS["starfull"]} Avalie a TechLab!'))
+        container.add_item(ui.Separator(spacing=SeparatorSpacing.large))
+
+        container.add_item(ui.TextDisplay(
+            'Vocẽ realizou um orçamento conosco, e teve acesso a nossas soluções?'
+            'Nos avalie deixando um Feedback pessoal com base na sua experiência com a TechLab!'
+        ))
+        container.add_item(ui.Separator(spacing=SeparatorSpacing.small))
+
+        container.add_item(ui.TextDisplay(f'{EMOJIS["set"]} **Como avaliar**'))
+        container.add_item(ui.TextDisplay(
+            '> - Clique no botão abaixo "Avalie a TechLab"(Um formulário será aberto)\n'
+            '> - Preencha a quantidade de estrelas que vocẽ nos dá(em um número inteiro de 1 a 5)\n'
+            '> - Faça uma descrição/feedback sobre sua experiência com os nossos serviços'
+            '> - Responda se vocẽ recomenda a TechLab'
+        ))
+
+        container.add_item(feedback_button)
         container.add_item(ui.TextDisplay('-# TechLab - 2025'))
 
         self.add_item(container)

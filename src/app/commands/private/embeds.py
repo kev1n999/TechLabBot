@@ -1,6 +1,6 @@
 import discord
 from core.builders.command_builder import SlashCommandBuilder
-from ...components.layouts.containers import PricesLayout, TipsLayout, RulesLayout, AboutLayout
+from ...components.layouts.containers import PricesLayout, TipsLayout, RulesLayout, AboutLayout, FeedbackLayout
 
 class SendEmbeds(SlashCommandBuilder):
     def __init__(self, tree):
@@ -18,6 +18,7 @@ class SendEmbeds(SlashCommandBuilder):
         rules_channel = guild.get_channel(1415385901944803510)
         tips_channel = guild.get_channel(1410430056479850640)
         about_channel = guild.get_channel(1416464766473474169)
+        make_feedback_channel = guild.get_channel(1422341491141115925)
         
         try:
             if keyword.lower() == "prices":
@@ -69,6 +70,14 @@ class SendEmbeds(SlashCommandBuilder):
                 await interaction.response.send_message(
                     f"A mensagem foi enviada para {about_channel.mention}!", ephemeral=True
                 )
+            
+            elif keyword.lower() == "feedback":
+                layout = FeedbackLayout()
+                await make_feedback_channel.send(view=layout)
+                await interaction.response.send_message(
+                    f"A mensagem foi enviada para {make_feedback_channel.mention}!", ephemeral=True
+                )
+                
         except Exception as err:
             print(err)
             await interaction.response.send_message(
