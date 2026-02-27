@@ -2,6 +2,7 @@
 > - Painel para abertura de tickets e atendimentos com variadas opções
 > - Gerenciamento automático de canais e usuários
 > - Envio automático de mensagens para apresentação de precificações, produtos e outras informações relevantes
+> - Sistema para clientes enviarem feedbacks/avaliações sobre a loja
 
 --- 
 
